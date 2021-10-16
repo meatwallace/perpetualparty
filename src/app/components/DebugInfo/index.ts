@@ -1,1 +1,1 @@
-export { DebugInfo } from "./DebugInfo";
+export { DebugInfo } from './DebugInfo';

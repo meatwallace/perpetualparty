@@ -1,6 +1,4 @@
 // we exclude `undefined` in this intentionally - fuck `undefined`.
-export type Serializable =
-  | string
-  | number
-  | null
-  | Record<string, Serializable>;
+type _Serializable = string | number | null | Date;
+
+export type Serializable = _Serializable | Record<string, _Serializable>;

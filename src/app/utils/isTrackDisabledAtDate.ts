@@ -1,9 +1,9 @@
-import { DisableTuneEvent, Tune } from "../types";
-import { getDisableTrackEvents } from "./getDisableTrackEvents";
-import { getMostRecentEnableTrackEvent } from "./getMostRecentEnableTrackEvent";
-import { getEnableTrackEventsByTrackID } from "./getEnableTrackEventsByTrackID";
+import { DisableTrackEvent, Track } from '../types';
+import { getDisableTrackEvents } from './getDisableTrackEvents';
+import { getMostRecentEnableTrackEvent } from './getMostRecentEnableTrackEvent';
+import { getEnableTrackEventsByTrackID } from './getEnableTrackEventsByTrackID';
 
-export function isTrackDisabledAtDate(track: Tune, date: Date): boolean {
+export function isTrackDisabledAtDate(track: Track, date: Date): boolean {
   const disableTrackEvents = getDisableTrackEventsByTrackID(track.id);
 
   // if we've got no disable events then we can safely say it's not disabled
@@ -34,12 +34,12 @@ export function isTrackDisabledAtDate(track: Tune, date: Date): boolean {
 
   const mostRecentDisableTrackEvent = getMostRecentDisableTrackEvent(
     disableTrackEvents,
-    date
+    date,
   );
 
   const mostRecentEnableTrackEvent = getMostRecentEnableTrackEvent(
     enableTrackEvents,
-    date
+    date,
   );
 
   // if our most recent disable event was more recent than the most recent enable event,
@@ -50,9 +50,9 @@ export function isTrackDisabledAtDate(track: Tune, date: Date): boolean {
 }
 
 export function getMostRecentDisableTrackEvent(
-  disableTrackEvents: Array<DisableTuneEvent>,
-  date: Date = new Date()
-): DisableTuneEvent {
+  disableTrackEvents: Array<DisableTrackEvent>,
+  date: Date = new Date(),
+): DisableTrackEvent {
   const [firstDisableTrackEvent] = disableTrackEvents;
 
   let currentDisableIndex = 0;
@@ -74,7 +74,7 @@ export function getMostRecentDisableTrackEvent(
 }
 
 export function getDisableTrackEventsByTrackID(
-  trackID: string
-): Array<DisableTuneEvent> {
+  trackID: string,
+): Array<DisableTrackEvent> {
   return getDisableTrackEvents().filter((event) => event.data.id === trackID);
 }

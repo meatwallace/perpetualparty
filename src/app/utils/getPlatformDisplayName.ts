@@ -1,7 +1,7 @@
-import { Platform } from "../types";
+import { Platform } from '../types';
 
 const PLATFORM_DISPLAY_NAME = {
-  [Platform.YouTube]: "YouTube"
+  [Platform.YouTube]: 'YouTube',
 };
 
 export function getPlatformDisplayName(platform: Platform): string {

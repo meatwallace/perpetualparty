@@ -1,6 +1,6 @@
 export function findLastIndex<T>(
   array: Array<T>,
-  predicate: (value: T, index: number, obj: Array<T>) => boolean
+  predicate: (value: T, index: number, obj: Array<T>) => boolean,
 ): number {
   let length = array.length;
 

@@ -1,5 +1,5 @@
-import { DebugInfoProperty } from "./DebugInfoProperty";
-import { DebugInfoSection } from "./DebugInfoSection";
+import { DebugInfoProperty } from './DebugInfoProperty';
+import { DebugInfoSection } from './DebugInfoSection';
 
 type Props = {
   title: string;

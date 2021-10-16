@@ -1,14 +1,14 @@
-import { getPlaylistDuration } from "../../../utils/getPlaylistDuration";
-import { getDurationString } from "../../../utils/getDurationString";
-import { Tune } from "../../../types";
-import { getPrettyDateString } from "./getPrettyDateString";
+import { getPlaylistDuration } from '../../../utils/getPlaylistDuration';
+import { getDurationString } from '../../../utils/getDurationString';
+import { Track } from '../../../types';
+import { getPrettyDateString } from './getPrettyDateString';
 
 export function getPlaylistDebugData(
-  playlist: Array<Tune>
+  playlist: Array<Track>,
 ): Array<[string, string | number]> {
   return [
-    ["Created", getPrettyDateString(playlist[0].added)],
-    ["Tunes", playlist.length],
-    ["Total Duration", getDurationString(getPlaylistDuration(playlist))]
+    ['Created', getPrettyDateString(playlist[0].added)],
+    ['Tracks', playlist.length],
+    ['Total Duration', getDurationString(getPlaylistDuration(playlist))],
   ];
 }

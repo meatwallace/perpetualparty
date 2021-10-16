@@ -1,10 +1,10 @@
-import { Event } from "../events/types";
+import { Event } from '../events/types';
 
 export enum Platform {
-  YouTube
+  YouTube,
 }
 
-export type Tune = {
+export type Track = {
   id: string;
   videoID: string;
   added: Date;
@@ -13,45 +13,47 @@ export type Tune = {
   length: number;
 };
 
-export type PlaylistData = Record<string, Tune>;
+export type PlaylistData = Record<string, Track>;
 
-export type Playlist = Array<Tune>;
+export type Playlist = Array<Track>;
 
-export type PlaybackData = Tune & {
+export type PlaybackData = Track & {
   index: number;
 };
 
-export type CurrentTuneInfo = PlaybackData & {
+export type CurrentTrackInfo = PlaybackData & {
   offset: number;
 };
 
-export type PlayerProps = CurrentTuneInfo & {};
+export type PlayerProps = CurrentTrackInfo & {};
 
-export type TuneURLParts = CurrentTuneInfo & {};
+export type TrackURLParts = CurrentTrackInfo & {};
 
 export enum EventType {
-  AddTune = "ADD_TUNE",
-  DisableTune = "DISABLE_TUNE",
-  EnableTune = "ENABLE_TUNE"
+  AddTrack = 'ADD_TRACK',
+  DisableTrack = 'DISABLE_TRACK',
+  EnableTrack = 'ENABLE_TRACK',
 }
 
-export type AddTuneEventData = Tune & {};
+export type AddTrackEventData = Track & {};
 
-export interface AddTuneEvent
-  extends Event<EventType.AddTune, AddTuneEventData> {}
+export interface AddTrackEvent extends Event<EventType.AddTrack, Track> {}
 
-export type DisableTuneEventData = {
+export type DisableTrackEventData = {
   id: string;
 };
 
-export interface DisableTuneEvent
-  extends Event<EventType.DisableTune, DisableTuneEventData> {}
+export interface DisableTrackEvent
+  extends Event<EventType.DisableTrack, DisableTrackEventData> {}
 
-export type EnableTuneEventData = {
+export type EnableTrackEventData = {
   id: string;
 };
 
-export interface EnableTuneEvent
-  extends Event<EventType.EnableTune, EnableTuneEventData> {}
+export interface EnableTrackEvent
+  extends Event<EventType.EnableTrack, EnableTrackEventData> {}
 
-export type PlaylistEvents = AddTuneEvent | DisableTuneEvent | EnableTuneEvent;
+export type PlaylistEvent =
+  | AddTrackEvent
+  | DisableTrackEvent
+  | EnableTrackEvent;

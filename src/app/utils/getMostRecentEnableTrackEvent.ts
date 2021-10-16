@@ -1,9 +1,9 @@
-import { EnableTuneEvent } from "../types";
+import { EnableTrackEvent } from '../types';
 
 export function getMostRecentEnableTrackEvent(
-  enableTrackEvents: Array<EnableTuneEvent>,
-  date: Date = new Date()
-): EnableTuneEvent {
+  enableTrackEvents: Array<EnableTrackEvent>,
+  date: Date = new Date(),
+): EnableTrackEvent {
   const [firstEnableTrackEvent] = enableTrackEvents;
 
   let currentIndex = 0;

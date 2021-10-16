@@ -1,7 +1,7 @@
-import { EnableTuneEvent } from "../types";
-import { playlistEvents } from "../data/playlistEvents";
-import { isEnableTrackEvent } from "./isEnableTrackEvent";
+import { EnableTrackEvent } from '../types';
+import { playlistEvents } from '../data/playlistEvents';
+import { isEnableTrackEvent } from './isEnableTrackEvent';
 
-export function getEnableTrackEvents(): Array<EnableTuneEvent> {
+export function getEnableTrackEvents(): Array<EnableTrackEvent> {
   return playlistEvents.filter(isEnableTrackEvent);
 }

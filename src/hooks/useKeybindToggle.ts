@@ -1,9 +1,9 @@
-import { useToggle } from "react-use";
-import { useHotkeys } from "react-hotkeys-hook";
+import { useToggle } from 'react-use';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 export function useKeybindToggle(
   keybind: string,
-  callback?: () => void
+  callback?: () => void,
 ): [boolean, () => void] {
   const [isVisible, toggleVisible] = useToggle(false);
 

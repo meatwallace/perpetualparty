@@ -1,4 +1,4 @@
-import { getPlaylistSortedByAdded } from "./getPlaylistSortedByAdded";
+import { getPlaylistSortedByAdded } from './getPlaylistSortedByAdded';
 
 export function getFirstTrack() {
   const [firstTrack] = getPlaylistSortedByAdded();

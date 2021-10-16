@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 type Props = {
   label: React.ReactText;
@@ -7,25 +7,25 @@ type Props = {
 
 export function DebugInfoProperty(props: Props) {
   return (
-    <span style={styles.line}>
-      <span style={styles.label}>{props.label}: </span>
-      <span style={styles.value}>{props.value}</span>
+    <span
+      style={{
+        display: 'block',
+        marginBottom: '4px',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+      }}
+    >
+      <span
+        style={{
+          display: 'inline-block',
+          fontWeight: 600,
+          minWidth: '200px',
+        }}
+      >
+        {props.label}:
+      </span>
+      <span>{props.value}</span>
     </span>
   );
 }
-
-const styles = {
-  line: {
-    display: "block",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
-    marginBottom: "4px"
-  },
-  label: {
-    fontWeight: 600,
-    display: "inline-block",
-    minWidth: "200px"
-  },
-  value: {}
-};

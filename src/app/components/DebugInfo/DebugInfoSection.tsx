@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren } from 'react';
 
 type Props = PropsWithChildren<{
   title: string;
@@ -15,10 +15,10 @@ export function DebugInfoSection(props: Props) {
 
 const styles = {
   container: {
-    marginBottom: "16px"
+    marginBottom: '16px',
   },
   title: {
-    fontSize: "16px",
-    marginBottom: "8px"
-  }
+    fontSize: '16px',
+    marginBottom: '8px',
+  },
 };

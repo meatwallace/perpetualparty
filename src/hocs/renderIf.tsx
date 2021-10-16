@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 export function renderIf<T>(
   Component: React.ComponentType<T>,
-  predicate: () => boolean
+  predicate: () => boolean,
 ) {
   return (props: T) => {
     const result = predicate();

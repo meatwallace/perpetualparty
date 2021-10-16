@@ -1,8 +1,10 @@
-import { Tune } from "../../../types";
+import { Track } from '../../../types';
 
-export function getPlaylistDebugTextList(playlist: Array<Tune>): Array<string> {
+export function getPlaylistDebugTextList(
+  playlist: Array<Track>,
+): Array<string> {
   // 0 - soMeYoUtubEID
   return playlist.map(
-    (tune, index) => `${index} - ${tune.added.toISOString()} - ${tune.id}`
+    (track, index) => `${index} - ${track.added.toISOString()} - ${track.id}`,
   );
 }

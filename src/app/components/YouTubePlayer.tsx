@@ -1,8 +1,8 @@
-import { useEffect, useRef } from "react";
-import YouTube from "react-youtube";
-import { getMSSeconds } from "../../time-utils/getMSSeconds";
-import { PlayerProps } from "../types";
-import { isDevelopment } from "../../config";
+import { useEffect, useRef } from 'react';
+import YouTube from 'react-youtube';
+import { getMSSeconds } from '../../time-utils/getMSSeconds';
+import { PlayerProps } from '../types';
+import { isDevelopment } from '../../config';
 
 type Props = PlayerProps & {};
 
@@ -12,7 +12,7 @@ export function YouTubePlayer(props: Props) {
 
   useEffect(() => {
     if (ref.current && isDevelopment) {
-      // TODO: fix type
+      // @ts-expect-error - we're attaching something to the global object
       global.__perpetualparty.utils.getInternalPlayer =
         ref.current.getInternalPlayer;
     }
@@ -21,7 +21,7 @@ export function YouTubePlayer(props: Props) {
   useEffect(() => {
     ref.current?.getInternalPlayer().loadVideoById({
       videoId: props.videoID,
-      startSeconds: offsetSeconds
+      startSeconds: offsetSeconds,
     });
   }, [offsetSeconds, props.videoID, ref]);
 
@@ -37,8 +37,8 @@ export function YouTubePlayer(props: Props) {
           enablejsapi: 1,
           modestbranding: 1,
           mute: 1,
-          playsinline: 0
-        }
+          playsinline: 0,
+        },
       }}
       onReady={handleReady}
     />

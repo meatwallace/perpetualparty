@@ -1,5 +1,5 @@
-import { Playlist } from "../types";
-import { getPlaylistData } from "./getPlaylistData";
+import { Playlist } from '../types';
+import { getPlaylistData } from './getPlaylistData';
 
 export function getPlaylist(): Playlist {
   const playlistData = getPlaylistData();

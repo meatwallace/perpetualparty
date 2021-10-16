@@ -1,20 +1,20 @@
-import { assertUnreachable } from "../../ts-utils/assertUnreachable";
-import { EventType, PlaylistEvents, PlaylistData } from "../types";
-import { reduceAddTuneEvent } from "./reduceAddTuneEvent";
-import { reduceDisableTuneEvent } from "./reduceDisableTuneEvent";
-import { reduceEnableTuneEvent } from "./reduceEnableTuneEvent";
+import { assertUnreachable } from '../../ts-utils/assertUnreachable';
+import { EventType, PlaylistEvent, PlaylistData } from '../types';
+import { reduceAddTrackEvent } from './reduceAddTrackEvent';
+import { reduceDisableTrackEvent } from './reduceDisableTrackEvent';
+import { reduceEnableTrackEvent } from './reduceEnableTrackEvent';
 
 export function reducePlaylistEvents(
   playlistData: PlaylistData,
-  event: PlaylistEvents
+  event: PlaylistEvent,
 ): PlaylistData {
   switch (event.type) {
-    case EventType.AddTune:
-      return reduceAddTuneEvent(playlistData, event);
-    case EventType.DisableTune:
-      return reduceDisableTuneEvent(playlistData, event);
-    case EventType.EnableTune:
-      return reduceEnableTuneEvent(playlistData, event);
+    case EventType.AddTrack:
+      return reduceAddTrackEvent(playlistData, event);
+    case EventType.DisableTrack:
+      return reduceDisableTrackEvent(playlistData, event);
+    case EventType.EnableTrack:
+      return reduceEnableTrackEvent(playlistData, event);
   }
 
   // @ts-expect-error - when our switch statement is exhaustive, this

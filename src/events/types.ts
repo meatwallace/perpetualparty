@@ -1,6 +1,9 @@
-import { Serializable } from "../types";
+import { Serializable } from '../types';
 
-export interface Event<T extends string, D extends Serializable> {
+export interface Event<
+  T extends string,
+  D extends Serializable = Serializable,
+> {
   type: T;
   data: D;
   created: Date;

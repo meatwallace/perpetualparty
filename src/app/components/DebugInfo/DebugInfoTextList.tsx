@@ -1,4 +1,4 @@
-import { DebugInfoSection } from "./DebugInfoSection";
+import { DebugInfoSection } from './DebugInfoSection';
 
 type Props = {
   items: Array<string>;
@@ -8,9 +8,24 @@ type Props = {
 export function DebugInfoTextList(props: Props) {
   return (
     <DebugInfoSection title={props.title}>
-      <ul style={styles.list}>
+      <ul
+        style={{
+          maxHeight: '250px',
+          overflowX: 'hidden',
+          overflowY: 'scroll',
+        }}
+      >
         {props.items.map((item) => (
-          <li key={item} style={styles.item}>
+          <li
+            key={item}
+            style={{
+              display: 'block',
+              height: '25px',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            }}
+          >
             {item}
           </li>
         ))}
@@ -18,18 +33,3 @@ export function DebugInfoTextList(props: Props) {
     </DebugInfoSection>
   );
 }
-
-const styles = {
-  list: {
-    maxHeight: "250px",
-    overflowX: "hidden",
-    overflowY: "scroll"
-  },
-  item: {
-    display: "block",
-    height: "25px",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap"
-  }
-};

@@ -1,9 +1,9 @@
-import { Tune } from "../types";
+import { Track } from '../types';
 
-export function getPlaylistDuration(playlist: Array<Tune>): number {
+export function getPlaylistDuration(playlist: Array<Track>): number {
   const duration = playlist.reduce(
-    (duration, tune) => duration + tune.length,
-    0
+    (duration, track) => duration + track.length,
+    0,
   );
 
   return duration;
