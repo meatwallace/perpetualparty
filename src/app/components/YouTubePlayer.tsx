@@ -2,25 +2,28 @@ import { useEffect, useRef } from "react";
 import YouTube from "react-youtube";
 import { getMSSeconds } from "../../time-utils/getMSSeconds";
 import { PlayerProps } from "../types";
+import { isDevelopment } from "../../config";
 
 type Props = PlayerProps & {};
 
-// TODO: fix type
-function handleReady(event: any) {
-  event.target.setVolume(100);
-}
-
-export function YoutubePlayer(props: Props) {
+export function YouTubePlayer(props: Props) {
   const offsetSeconds = getMSSeconds(props.offset);
-
   const ref = useRef<YouTube | null>(null);
 
   useEffect(() => {
+    if (ref.current && isDevelopment) {
+      // TODO: fix type
+      global.__perpetualparty.utils.getInternalPlayer =
+        ref.current.getInternalPlayer;
+    }
+  }, [ref]);
+
+  useEffect(() => {
     ref.current?.getInternalPlayer().loadVideoById({
-      videoId: props.id,
+      videoId: props.videoID,
       startSeconds: offsetSeconds
     });
-  }, [offsetSeconds, props.id, ref]);
+  }, [offsetSeconds, props.videoID, ref]);
 
   return (
     <YouTube
@@ -40,4 +43,9 @@ export function YoutubePlayer(props: Props) {
       onReady={handleReady}
     />
   );
+}
+
+// TODO: fix type
+function handleReady(event: any) {
+  event.target.setVolume(100);
 }

@@ -1,24 +1,39 @@
 import { useCallback, useEffect, useState } from "react";
-import { CurrentTuneInfo } from "../types";
+import { CurrentTuneInfo, PlaybackData } from "../types";
+import { Block } from "../../chain/types";
 import { getCurrentTuneInfo } from "../utils/getCurrentTuneInfo";
-import { playlist } from "../data";
+import { getTuneChain } from "../utils/getTuneChain";
 
 // keep track of our timeout outside of the component so we can track it across rerenders
 let timeoutID: ReturnType<typeof setTimeout> | null = null;
 
-export function useCurrentTuneInfo(): CurrentTuneInfo | null {
+export function useCurrentTuneInfo(
+  providedChain: Array<Block<PlaybackData>> | null = null
+): CurrentTuneInfo | null {
   const [
     currentTuneInfo,
     setCurrentTuneInfo
   ] = useState<CurrentTuneInfo | null>(null);
 
-  // when our component mounts, set our initial tune info
+  const [chain, setChain] = useState<Array<Block<PlaybackData>> | null>(
+    providedChain
+  );
+
+  // when our component mounts, get our tune chain if we didn't receive it as an arg
+  // then get our initial tune info
   useEffect(() => {
     (async () => {
-      const tuneInfo = await getCurrentTuneInfo(playlist);
+      const latestChain = chain ?? (await getTuneChain());
+
+      if (chain !== latestChain) {
+        setChain(latestChain);
+      }
+
+      const tuneInfo = getCurrentTuneInfo(latestChain);
 
       setCurrentTuneInfo(tuneInfo);
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // this sets up a recursive timeout to go to the next tune when our current ends
@@ -35,7 +50,11 @@ export function useCurrentTuneInfo(): CurrentTuneInfo | null {
       timeoutID = null;
 
       (async () => {
-        const tuneInfo = await getCurrentTuneInfo(playlist);
+        const latestChain = await getTuneChain();
+
+        setChain(latestChain);
+
+        const tuneInfo = getCurrentTuneInfo(latestChain);
 
         setCurrentTuneInfo(tuneInfo);
       })();

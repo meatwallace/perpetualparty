@@ -1,7 +1,7 @@
-import { TuneURLParts } from "../types";
 import { getMSSeconds } from "../../time-utils/getMSSeconds";
+import { TuneURLParts } from "../types";
 
-export function getYoutubeEmbedURL(info: TuneURLParts): string {
+export function getYouTubeEmbedURL(info: TuneURLParts): string {
   const offsetSeconds = getMSSeconds(info.offset);
 
   // TODO: build URL using something more robust

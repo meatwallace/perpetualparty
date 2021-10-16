@@ -1,13 +1,12 @@
 import "./styles.css";
 
-// import { DebugInfo } from "./tunes/components/DebugInfo";
-// import { Stats } from "./tunes/components/Stats";
-import { Platform } from "./tunes/types";
-import { useCurrentTuneInfo } from "./tunes/hooks/useCurrentTuneInfo";
-import { YoutubePlayer } from "./tunes/components/YoutubePlayer";
+import { DebugInfo } from "./app/components/DebugInfo";
+import { YouTubePlayer } from "./app/components/YouTubePlayer";
+import { Platform } from "./app/types";
+import { useCurrentTuneInfo } from "./app/hooks/useCurrentTuneInfo";
 
 const PLATFORM_PLAYER_COMPONENT = {
-  [Platform.Youtube]: YoutubePlayer
+  [Platform.YouTube]: YouTubePlayer
 };
 
 export default function App() {
@@ -22,8 +21,7 @@ export default function App() {
   return (
     <div style={{ height: "100%", width: "100%" }}>
       <PlayerComponent {...currentTuneInfo} />
-      {/* <Stats /> */}
-      {/* <DebugInfo data={{ tune, offset }} /> */}
+      <DebugInfo />
     </div>
   );
 }

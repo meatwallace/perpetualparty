@@ -21,7 +21,5 @@ export async function createBlock<Data>(
 
   block.hash = await getSHA256Hash(JSON.stringify(hashParts));
 
-  console.log("!! createBlock:", block);
-
   return block;
 }

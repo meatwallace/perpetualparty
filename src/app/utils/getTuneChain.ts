@@ -4,17 +4,18 @@ import { createBlock } from "../../chain/createBlock";
 import { createGenesisBlock } from "../../chain/createGenesisBlock";
 import { findLastIndex } from "../../fn-utils/findLastIndex";
 import { PlaybackData, Tune } from "../types";
+import { getPlaylistSortedByAdded } from "./getPlaylistSortedByAdded";
+import { isTrackDisabledAtDate } from "./isTrackDisabledAtDate";
 
-export async function getTuneChain(
-  playlist: Array<Tune>
-): Promise<Array<Block<PlaybackData>>> {
-  const [firstTune] = playlist;
-  const partyStartedAt = firstTune.added.getTime();
+export async function getTuneChain(): Promise<Array<Block<PlaybackData>>> {
+  const playlist = getPlaylistSortedByAdded();
+  const [firstTrack] = playlist;
+  const partyStartedAt = firstTrack.added.getTime();
   const arrivedAt = Date.now();
 
   // set up our initial chain
-  const genesisBlock = await createGenesisBlock(firstTune.added, {
-    ...firstTune,
+  const genesisBlock = await createGenesisBlock(firstTrack.added, {
+    ...firstTrack,
     index: 0
   });
 
@@ -38,8 +39,8 @@ export async function getTuneChain(
     // calculate our last possible tune index, which set the bounds of the tunes available at the
     // current time in the loop.
     const firstPossibleTuneIndex = 0;
-    const lastPossibleTuneIndex = findLastIndex(
-      playlist,
+    const lastPossibleTuneIndex = findLastIndex<Tune>(
+      Object.values(playlist),
       (tune) => tune.added.getTime() < nextTuneStarts
     );
 
@@ -49,8 +50,13 @@ export async function getTuneChain(
 
     let nextTuneIndex = currentTuneIndex;
 
-    // while our next tune is the same as the current tune, randomize a new next tune
-    while (nextTuneIndex === currentTuneIndex) {
+    const isSameTrack = () => nextTuneIndex === currentTuneIndex;
+
+    const isTrackDisabled = () =>
+      isTrackDisabledAtDate(playlist[nextTuneIndex], new Date(nextTuneStarts));
+
+    // if the next track is the same as the current track or it's disabled, rng a different track.
+    while (isSameTrack() || isTrackDisabled()) {
       nextTuneIndex = rng.nextInt(
         firstPossibleTuneIndex,
         lastPossibleTuneIndex
