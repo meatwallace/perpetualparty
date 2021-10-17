@@ -1,5 +1,5 @@
-import { getPlatformDisplayName } from '../../../utils/getPlatformDisplayName';
-import { CurrentTrackInfo } from '../../../types';
+import { CurrentTrackInfo } from '@types';
+import { getPlatformDisplayName } from '@playlist';
 import { getPrettyDateString } from './getPrettyDateString';
 import { getPrettyDuration } from './getPrettyDuration';
 

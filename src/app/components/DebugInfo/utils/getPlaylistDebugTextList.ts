@@ -1,4 +1,4 @@
-import { Track } from '../../../types';
+import { Track } from '@types';
 
 export function getPlaylistDebugTextList(
   playlist: Array<Track>,

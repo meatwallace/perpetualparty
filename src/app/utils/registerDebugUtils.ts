@@ -1,13 +1,12 @@
-import { getPlaylist } from './getPlaylist';
-import { getPlaylistData } from './getPlaylistData';
-import { getTrackChain } from './getTrackChain';
+import { getPlaylist, getPlaylistTrackMap } from '@playlist';
+import { getPlaybackChain } from '@playback';
 
 export function registerDebugUtils() {
   const __perpetualparty = {
     utils: {
       getPlaylist,
-      getPlaylistData,
-      getTrackChain,
+      getPlaylistTrackMap,
+      getPlaybackChain,
 
       // stub out our `getInternalPlayer` call that that the
       // `YouTubePlayer` component will overwrite later

@@ -1,5 +1,5 @@
-import { PlaybackData } from '../../../types';
-import { Block } from '../../../../chain/types';
+import { PlaybackData } from '@types';
+import { Block } from '@chain';
 import { getPrettyDateString } from './getPrettyDateString';
 
 export function getBlockchainDebugData(

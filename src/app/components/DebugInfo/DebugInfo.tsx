@@ -1,14 +1,13 @@
-import { isProduction } from '../../../config';
-import { renderIf } from '../../../hocs/renderIf';
-import { useKeybindToggle } from '../../../hooks/useKeybindToggle';
-import { useCurrentTrackInfo } from '../../hooks/useCurrentTrackInfo';
-import { useTrackChain } from '../../hooks/useTrackChain';
-import { getPlaylist } from '../../utils/getPlaylist';
+import { renderIf } from '@hocs';
+import { useKeybindToggle } from '@hooks';
+import { useCurrentTrackInfo, usePlaybackChain } from '@playback';
+import { getPlaylist } from '@playlist';
+import { isProduction } from '../../config';
 import { getBlockchainDebugData } from './utils/getBlockchainDebugData';
 import { getCurrentTrackDebugData } from './utils/getCurrentTrackDebugData';
 import { getPlaylistDebugData } from './utils/getPlaylistDebugData';
 import { getPlaylistDebugTextList } from './utils/getPlaylistDebugTextList';
-import { getTrackChainDebugTextList } from './utils/getTrackChainDebugTextList';
+import { getPlaybackChainDebugTextList } from './utils/getPlaybackChainDebugTextList';
 import { DebugInfoProperties } from './DebugInfoProperties';
 import { DebugInfoTextList } from './DebugInfoTextList';
 
@@ -16,7 +15,7 @@ const TOGGLE_DEBUG_INFO_KEYBIND = 'alt+d';
 
 export function DebugInfo_() {
   const playlist = getPlaylist();
-  const chain = useTrackChain();
+  const chain = usePlaybackChain();
   const currentTrackInfo = useCurrentTrackInfo(chain);
   const [isVisible, toggleIsVisible] = useKeybindToggle(
     TOGGLE_DEBUG_INFO_KEYBIND,
@@ -104,41 +103,12 @@ export function DebugInfo_() {
         />
         <DebugInfoTextList
           title="Blockchain Log"
-          items={getTrackChainDebugTextList(chain)}
+          items={getPlaybackChainDebugTextList(chain)}
         />
       </main>
     </div>
   );
 }
-
-const styles = {
-  header: {
-    alignItems: 'center',
-    display: 'flex',
-    flexFlow: 'row nowrap',
-    justifyContent: 'space-between',
-    paddingBottom: '8px',
-    paddingLeft: '16px',
-    paddingRight: '16px',
-    paddingTop: '16px',
-  },
-  title: {
-    marginBottom: '8px',
-    fontSize: '18px',
-  },
-  main: {
-    overflowX: 'hidden',
-    overflowY: 'scroll',
-    paddingBottom: '16px',
-    paddingLeft: '16px',
-    paddingRight: '16px',
-    paddingTop: '8px',
-  },
-  closeIcon: {
-    fontWeight: 800,
-    fontSize: 18,
-  },
-};
 
 // as we want this to be a development mode only tool we wrap it in a conditional render HOC
 export const DebugInfo = renderIf(DebugInfo_, () => !isProduction);

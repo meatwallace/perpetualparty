@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
 import YouTube from 'react-youtube';
-import { getMSSeconds } from '../../time-utils/getMSSeconds';
-import { PlayerProps } from '../types';
-import { isDevelopment } from '../../config';
+import { CurrentTrackInfo } from '@types';
+import { getMSSeconds } from '@time-utils';
+import { isDevelopment } from '../config';
 
-type Props = PlayerProps & {};
+type Props = CurrentTrackInfo & {};
 
 export function YouTubePlayer(props: Props) {
   const offsetSeconds = getMSSeconds(props.offset);

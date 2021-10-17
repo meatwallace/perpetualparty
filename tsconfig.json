@@ -1,15 +1,25 @@
 {
-    "include": [
-        "./src/**/*"
-    ],
-    "compilerOptions": {
-        "esModuleInterop": true,
-        "lib": [
-            "DOM",
-            "ESNext"
-        ],
-        "jsx": "react-jsx",
-        "skipLibCheck": true,
-        "strict": true,
-    }
+  "include": ["./src/**/*"],
+  "compilerOptions": {
+    "lib": ["DOM", "ESNext"],
+    "rootDir": ".",
+    "baseUrl": "src",
+    "paths": {
+      "@chain": ["lib/chain"],
+      "@data": ["lib/data"],
+      "@events": ["lib/events"],
+      "@fn-utils": ["lib/fn-utils"],
+      "@hocs": ["lib/hocs"],
+      "@hooks": ["lib/hooks"],
+      "@playback": ["lib/playback"],
+      "@playlist": ["lib/playlist"],
+      "@time-utils": ["lib/time-utils"],
+      "@ts-utils": ["lib/ts-utils"],
+      "@types": ["lib/types"]
+    },
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "strict": true
+  }
 }

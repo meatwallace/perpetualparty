@@ -1,6 +1,6 @@
-import { getPlaylistDuration } from '../../../utils/getPlaylistDuration';
+import { getPlaylistDuration } from '@playlist';
+import { Track } from '@types';
 import { getDurationString } from '../../../utils/getDurationString';
-import { Track } from '../../../types';
 import { getPrettyDateString } from './getPrettyDateString';
 
 export function getPlaylistDebugData(
